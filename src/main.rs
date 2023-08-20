@@ -30,7 +30,7 @@ fn AppRouter() -> impl IntoView {
     view! {
         <Router>
             <nav class="flex sm:justify-center items-center space-x-4">
-                <a class="rounded-lg px-3 py-2 font-medium hover:bg-slate-100 hover:text-slate-900" href="/?tz=UTC">"Home"</a>
+                <a class="rounded-lg px-3 py-2 font-medium hover:bg-slate-100 hover:text-slate-900" href="/">"Home"</a>
                 <a class="rounded-lg px-3 py-2 font-medium hover:bg-slate-100 hover:text-slate-900" href="/quote">"Quote"</a>
                 <a class="rounded-lg px-3 py-2 font-medium hover:bg-slate-100 hover:text-slate-900" href="/timezone">"Update timezone"</a>
             </nav>
@@ -127,10 +127,16 @@ fn App() -> impl IntoView {
     };
 
     view! {
+        // Current date and time
         <div class="space-y-2">
             <div class="text-4xl">{date}</div>
-            <div class="text-3xl tracking-wide font-mono">{time}</div>
+            <div class="text-3xl font-mono">{time}</div>
         </div>
-        <div class="mt-8 text-5xl tracking-wide font-mono">{end_of_day}</div>
+
+        // Balance in bank account
+        <div class="mt-8 font-mono">
+            <p class="text-5xl">"$"{end_of_day}</p>
+            <p class="mt-2">"available in your bank account"</p>
+        </div>
     }
 }
