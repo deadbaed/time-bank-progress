@@ -25,14 +25,22 @@ fn main() {
     })
 }
 
+fn github_pages_route<S: Into<String>>(url: S) -> String {
+    if cfg!(debug_assertions) {
+        url.into()
+    } else {
+        format!("/time-bank-progress{}", url.into())
+    }
+}
+
 #[component]
 fn AppRouter() -> impl IntoView {
     view! {
         <Router>
             <nav class="flex sm:justify-center items-center space-x-4">
-                <a class="rounded-lg px-3 py-2 font-medium hover:bg-slate-100 hover:text-slate-900" href="/">"Home"</a>
-                <a class="rounded-lg px-3 py-2 font-medium hover:bg-slate-100 hover:text-slate-900" href="/quote">"Quote"</a>
-                <a class="rounded-lg px-3 py-2 font-medium hover:bg-slate-100 hover:text-slate-900" href="/timezone">"Update timezone"</a>
+                <a class="rounded-lg px-3 py-2 font-medium hover:bg-slate-100 hover:text-slate-900" href=github_pages_route("/")>"Home"</a>
+                <a class="rounded-lg px-3 py-2 font-medium hover:bg-slate-100 hover:text-slate-900" href=github_pages_route("/quote")>"Quote"</a>
+                <a class="rounded-lg px-3 py-2 font-medium hover:bg-slate-100 hover:text-slate-900" href=github_pages_route("/timezone")>"Update timezone"</a>
             </nav>
 
             <main class="mt-8">
@@ -87,7 +95,7 @@ fn Timezone() -> impl IntoView {
             .map(|tz| {
                 // Link with timezone as query
                 let encoded_timezone = url::form_urlencoded::byte_serialize(tz.as_bytes()).collect::<String>();
-                let uri = format!("/?tz={}", encoded_timezone);
+                let uri = github_pages_route(format!("/?tz={}", encoded_timezone));
                 view! { <a class="block my-1" href=uri>{tz}</a> }
             })
             .collect_view();
