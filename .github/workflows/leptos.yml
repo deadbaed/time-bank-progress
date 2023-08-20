@@ -1,0 +1,30 @@
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get code
+        uses: actions/checkout@v3
+      - name: cargo trunk
+        uses: jetli/trunk-action@v0.4.0
+      - name: Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - name: Install and Build
+        env:
+          TRUNK_BUILD_PUBLIC_URL: /${{ github.event.repository.name }}/
+        run: |
+          npm install
+          trunk build --release
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
