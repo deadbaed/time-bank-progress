@@ -45,10 +45,10 @@ fn AppRouter() -> impl IntoView {
 
             <main class="mt-8">
                 <Routes>
-                    <Route path="/" view=App />
-                    <Route path="/quote" view=Quote />
-                    <Route path="/timezone" view=Timezone />
-                    <Route path="/*any" view=NotFound/>
+                    <Route path=github_pages_route("/") view=App />
+                    <Route path=github_pages_route("/quote") view=Quote />
+                    <Route path=github_pages_route("/timezone") view=Timezone />
+                    <Route path=github_pages_route("/*any") view=NotFound/>
                 </Routes>
             </main>
         </Router>
