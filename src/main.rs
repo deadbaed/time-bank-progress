@@ -16,8 +16,8 @@ fn main() {
                 <div>
                     "Made with ❤️ by "
                     <a class="underline" href="https://philippeloctaux.com">"phil"</a>" with "
-                    <a class="underline" href="https://leptos.dev">"leptos"</a>,
-                    "see the "
+                    <a class="underline" href="https://leptos.dev">"leptos"</a>
+                    ", see the "
                     <a class="underline" href="https://github.com/x4m3/time-bank-progress">"source code"</a>
                 </div>
             </footer>
